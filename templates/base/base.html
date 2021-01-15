@@ -42,15 +42,35 @@
                         <a href="{% url 'home:index' %}"><img src={% static 'img/header.svg' %} alt="uniqlo" class="header__logo--img"></a>
                     </div>
                     <div class="header__list header__list--category">
+                        <style>
+                            @media only screen and (max-width: 990px){
+                                .hidden--small--title{
+                                    display: none;
+                                }
+                                .header-span-product{
+                                    font-size: 1.8rem!important;
+                                }
+                            }
+                            @media only screen and (max-width: 700px){
+                                .header-span-product{
+                                    font-size: 1.2rem!important;
+                                }
+                            }
+                            @media only screen and (max-width: 600px){
+                                .header-span-product{
+                                    font-size: 1.2rem!important;
+                                }
+                            }
+                        </style>
                         <div>
-                            <a href="#" class="header__category--link label--primary nav__text-wrapper"><span
+                            <a href="{% url 'appProduct:product' %}?gender=1" class="header__category--link label--primary nav__text-wrapper hidden--small--title"><span
                                     class="header-span">Women</span></a>
-                            <a href="#" class="header__category--link label--primary nav__text-wrapper"><span
+                            <a href="{% url 'appProduct:product' %}?gender=2" class="header__category--link label--primary nav__text-wrapper hidden--small--title"><span
                                     class="header-span">Men</span></a>
-                            <a href="#" class="header__category--link label--primary nav__text-wrapper"><span
+                            <a href="{% url 'appProduct:product' %}?gender=3" class="header__category--link label--primary nav__text-wrapper hidden--small--title"><span
                                     class="header-span">Kids</span></a>
                             <a href="{% url 'appProduct:product' %}" class="header__category--link label--primary nav__text-wrapper"><span
-                                    class="header-span">product</span></a>
+                                    class="header-span header-span-product">product</span></a>
                         </div>
                     </div>
                 </nav>
@@ -60,8 +80,65 @@
                             <form action="{% url 'appProduct:product' %}" class="header__search--form" method="GET">
                                 <!-- <input type="text" name="name" id="id_name"> -->
                                 <div style="display: none;">{{productFilter.form}}</div>
-                                <input type="text" name="name" id="id_name" class="header__search--input" placeholder="Search">
-                                <button type="submit" class="search__button button__icon" id="searchButton">
+                                <style>
+                                    @media only screen and (min-width: 990px){
+                                        .search__button--small--bg{
+                                            display: none!important;
+                                        }
+                                        #radio__search{
+                                            display: none;
+                                        }
+                                    }
+                                    @media only screen and (max-width: 990px){
+                                        .header__search--content{
+                                            width: 200px!important;
+                                            position: absolute!important;
+                                        }
+                                        .search__button--small--bg{
+                                            display: block;
+                                        }
+                                        .responsive__search{
+                                            display: none!important;
+                                        }
+                                        #radio__search:checked~ .responsive__search{
+                                            position: absolute!important;
+                                            top:150%;    
+                                            left: -80%;
+                                            display: flex!important;                                     
+                                        }
+
+                                        .header__search--input{
+                                            background-color: #fff;
+                                        }
+                                        .header__search--form{
+                                        }
+                                        .search__button{
+                                            border-left: 1px solid #ababab!important;
+                                            background-color: #fff;
+                                        } 
+                                        #radio__search{
+                                            display: none;
+                                        }
+                                    }
+
+                                </style>
+                                <input type="checkbox" id="radio__search">
+                                <div class="responsive__search" style="display: flex;">
+                                    <input type="text" name="name" id="id_name" class="header__search--input" placeholder="Search">
+                                    <button type="submit" class="search__button button__icon search__button--big--bg" id="searchButton">
+                                        <div class="button__icon--container">
+                                            <svg class="button__icon-svg" viewBox="0 0 24 24" focusable="false"
+                                                role="presentation" width="24" height="24">
+                                                <g fill-rule="evenodd">
+                                                    <path
+                                                        d="M4.5704,10.5894 C4.5704,7.2704 7.2704,4.5704 10.5894,4.5704 C13.9084,4.5704 16.6084,7.2704 16.6084,10.5894 C16.6084,13.9084 13.9084,16.6084 10.5894,16.6084 C7.2704,16.6084 4.5704,13.9084 4.5704,10.5894 Z M16.4784,15.3674 C17.5394,14.0624 18.1784,12.3994 18.1784,10.5894 C18.1784,6.4044 14.7744,3.0004 10.5894,3.0004 C6.4044,3.0004 3.0004,6.4044 3.0004,10.5894 C3.0004,14.7744 6.4044,18.1784 10.5894,18.1784 C12.3994,18.1784 14.0624,17.5394 15.3674,16.4784 L19.6594,20.7704 C19.8134,20.9234 20.0134,21.0004 20.2144,21.0004 C20.4164,21.0004 20.6164,20.9234 20.7704,20.7704 C21.0764,20.4634 21.0764,19.9664 20.7704,19.6594 L16.4784,15.3674 Z">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                    </button>
+                                </div>
+                                <label for="radio__search" class="search__button button__icon search__button--small--bg" style="text-align: center; align-items:center; display:flex">
                                     <div class="button__icon--container">
                                         <svg class="button__icon-svg" viewBox="0 0 24 24" focusable="false"
                                             role="presentation" width="24" height="24">
@@ -72,7 +149,7 @@
                                             </g>
                                         </svg>
                                     </div>
-                                </button>
+                                </label>
                             </form>
                         </div>
                     </div>
